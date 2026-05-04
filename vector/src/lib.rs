@@ -111,4 +111,31 @@ mod tests {
             actual
         )
     }
+
+    #[test]
+    fn add_assign_to_vector() {
+        let mut vector = Vector::from(vec![1, 2, 3]);
+        vector += 1;
+        assert_eq!(Vector::from(vec![2, 3, 4]), vector);
+    }
+
+    #[test]
+    fn add_assign_ref_to_vector() {
+        let mut vector = Vector::from(vec![1, 2, 3]);
+        vector += &1;
+        assert_eq!(Vector::from(vec![2, 3, 4]), vector);
+    }
+
+    #[test]
+    fn add_assign_str_to_vector_of_strings() {
+        let mut vector = Vector::from(vec!["Hello".to_string(), "Goodbye".to_string()]);
+        vector += " world!";
+        assert_eq!(
+            Vector::from(vec![
+                "Hello world!".to_string(),
+                "Goodbye world!".to_string()
+            ]),
+            vector
+        );
+    }
 }
