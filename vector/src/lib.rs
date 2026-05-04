@@ -5,9 +5,12 @@ pub struct Vector<T> {
     data: Vec<T>,
 }
 
-impl<T> From<Vec<T>> for Vector<T> {
-    fn from(value: Vec<T>) -> Self {
-        Vector { data: value }
+impl<T, List> From<List> for Vector<T>
+where
+    List: Into<Vec<T>>,
+{
+    fn from(value: List) -> Self {
+        Vector { data: value.into() }
     }
 }
 
@@ -58,6 +61,18 @@ mod tests {
     #[test]
     fn transform_vec_into_vector() {
         let result: Vector<i32> = vec![1].into();
+        assert_eq!(result, Vector { data: vec![1] });
+    }
+
+    #[test]
+    fn transform_array_into_vector() {
+        let result: Vector<i32> = [1].into();
+        assert_eq!(result, Vector { data: vec![1] });
+    }
+
+    #[test]
+    fn transform_slice_into_vector() {
+        let result: Vector<i32> = (&[1]).into();
         assert_eq!(result, Vector { data: vec![1] });
     }
 
