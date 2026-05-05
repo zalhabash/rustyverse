@@ -27,14 +27,14 @@ jobs:
       - run: cargo test
 
   cargo-fmt:
-    name: rust format check
+    name: cargo format check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
       - run: cargo fmt --check
 
   cargo-clippy:
-    name: rust clippy (lint)
+    name: cargo clippy (lint)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
