@@ -1,0 +1,41 @@
+name: Main
+on:
+  - push
+  - workflow_dispatch
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_VERBOSE: true
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: "-Dwarnings"
+
+jobs:
+  cargo-check:
+    name: cargo check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: cargo check
+
+  cargo-test:
+    name: cargo test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: cargo test
+
+  cargo-fmt:
+    name: rust format check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: cargo fmt --check
+
+  cargo-clippy:
+    name: rust clippy (lint)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: cargo clippy
