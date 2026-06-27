@@ -49,7 +49,7 @@ where
 {
     fn add_assign(&mut self, rhs: Rhs) {
         for item in self.data.iter_mut() {
-            *item += rhs
+            *item += rhs;
         }
     }
 }
