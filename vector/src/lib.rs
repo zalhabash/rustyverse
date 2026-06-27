@@ -1,4 +1,4 @@
-use std::ops::Add;
+use std::ops::{Add, AddAssign};
 
 #[derive(Debug, PartialEq, Eq, Default)]
 pub struct Vector<T> {
@@ -38,6 +38,18 @@ where
     fn add(self, rhs: Rhs) -> Self::Output {
         Vector {
             data: self.data.iter().map(|value| value + rhs).collect(),
+        }
+    }
+}
+
+impl<T, Rhs> AddAssign<Rhs> for Vector<T>
+where
+    T: AddAssign<Rhs>,
+    Rhs: Copy,
+{
+    fn add_assign(&mut self, rhs: Rhs) {
+        for item in self.data.iter_mut() {
+            *item += rhs
         }
     }
 }
